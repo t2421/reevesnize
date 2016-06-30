@@ -74,6 +74,13 @@ export default class FaceTracker{
         this._drawPartsPoints(cc,this.faceParts.rightEye);
         this._drawPartsPoints(cc,this.faceParts.noseLine);
         this._drawPartsPoints(cc,this.faceParts.noseEdge);
+        
+
+        cc.fillStyle = "rgb(0, 80, 77)"
+        this._drawPartsPoints(cc,this.faceParts.leftBeard);
+        this._drawPartsPoints(cc,this.faceParts.rightBeard);
+        this._drawPartsPoints(cc,this.faceParts.lowerBeard);
+        this._drawPartsPoints(cc,this.faceParts.upperBeard);        
 
     }
 
@@ -148,6 +155,30 @@ export default class FaceTracker{
             this.faceParts.noseEdge.push(this.positions[idx]);
         
         });
+
+        this.faceParts.leftBeard = [];
+        this.faceIndeces.leftBeard.map((idx)=>{
+            this.faceParts.leftBeard.push(this.positions[idx]);
+        
+        });
+
+        this.faceParts.rightBeard = [];
+        this.faceIndeces.rightBeard.map((idx)=>{
+            this.faceParts.rightBeard.push(this.positions[idx]);
+        
+        });
+
+        this.faceParts.lowerBeard = [];
+        this.faceIndeces.lowerBeard.map((idx)=>{
+            this.faceParts.lowerBeard.push(this.positions[idx]);
+        
+        });
+
+        this.faceParts.uppperBeard = [];
+        this.faceIndeces.uppperBeard.map((idx)=>{
+            this.faceParts.uppperBeard.push(this.positions[idx]);
+        
+        });
     }
 
     onTrackrNotFound() {
@@ -174,6 +205,18 @@ class FaceParts{
         this.noseEdge = [];
         this.lowerLip = [];
         this.upperLip = [];
+        this.leftBeard = [];
+        this.rightBeard = [];
+        this.lowerBeard = [];
+        this.uppperBeard = [];
+    }
+
+    update(){
+
+    }
+
+    draw(){
+
     }
 }
 
@@ -191,5 +234,10 @@ class FaceIndeces{
         this.noseEdge = [34,35,36,42,37,43,38,39,40]
         this.lowerLip = [44,55,54,53,52,51,50,58,57,56];
         this.upperLip = [44,61,60,59,50,49,48,47,46,45];
+
+        this.leftBeard = [1,2,3,4,5,44,35];
+        this.rightBeard = [39,50,9,10,11,12,13];
+        this.lowerBeard = [44,5,6,7,8,9,10,50,51,52,53,54,55];
+        this.uppperBeard = [36,44,45,46,47,48,49,50,38,43,37,42];
     }
 }
