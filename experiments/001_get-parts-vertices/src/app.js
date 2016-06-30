@@ -44,22 +44,13 @@ class App {
 
     onMouseDown(e) {
         e.preventDefault();
-        console.log(this.tracker.normalize(this.tracker.positions))
+
     }
     onMouseMove(e) {
-        e.preventDefault();
-        let x =  e.clientX - Config.RENDER_WIDTH/2;
-        let y =  e.clientY - Config.RENDER_HEIGHT/2;
-        this.mouse.x = x;
-        this.mouse.y = y;
 
-
-        //this.update();
     }
     onResize() {
-        //this.camera.aspect = window.innerWidth / window.innerHeight;
-        //this.camera.updateProjectionMatrix();
-        //this.renderer.setSize(window.innerWidth, window.innerHeight);
+
     }
 }
 
