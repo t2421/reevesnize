@@ -4,6 +4,7 @@ import defaultModel from 'exports?pModel!clmtrackr/models/model_pca_20_svm';
 export default class FaceTracker{
     
     constructor(){
+        this.threshold = 300;
         this.faceIndeces = new FaceIndeces();
         this.faceParts = new FaceParts();
 
@@ -22,8 +23,11 @@ export default class FaceTracker{
     } 
 
     start(target){
+
         this.tracker.start(target);
     }
+
+
 
     destroy(){
         this.positions = undefined;
@@ -183,11 +187,11 @@ export default class FaceTracker{
     }
 
     onTrackrNotFound() {
-        
+        console.log("notfound")
     }
 
     onTrackrLost() {
-        
+        console.log("onTrackrLost")
     }
 
     onTrackConverged() {
@@ -243,7 +247,7 @@ class FaceIndeces{
 
         this.leftBeard = [1,2,3,4,5,44,35];
         this.rightBeard = [39,50,9,10,11,12,13];
-        this.lowerBeard = [44,5,6,7,8,9,10,50,51,52,53,54,55];
+        this.lowerBeard = [44,5,6,7,8,9,50,51,52,53,54,55];
         this.uppperBeard = [36,44,45,46,47,48,49,50,38,43,37,42];
     }
 }
