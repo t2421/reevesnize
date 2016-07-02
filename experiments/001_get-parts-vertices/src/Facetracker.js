@@ -85,6 +85,7 @@ export default class FaceTracker{
     }
 
     _drawPartsPoints(cc,partsPoints){
+        if(!partsPoints) return;
         partsPoints.map((p)=>{
             if(!p) return
             cc.fillRect(p[0],p[1],2,2);
