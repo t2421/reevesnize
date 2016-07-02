@@ -8,13 +8,13 @@ export default class FaceTracker{
         this.faceParts = new FaceParts();
 
         this.vertices = [];
-        this.tracker = new clm.tracker({useWebGL: true});
+        this.tracker = new clm.tracker({useWebGL: true,stopOnConvergence:true});
         this.model = defaultModel;
         this.tracker.init(this.model);
         this.positions = undefined;
         document.addEventListener('clmtrackrNotFound', this.onTrackrNotFound.bind(this));
         document.addEventListener('clmtrackrLost', this.onTrackrLost.bind(this));
-
+        document.addEventListener('clmtrackrConverged',this.onTrackConverged.bind(this));
         this.edge = [];
     }
     
@@ -88,7 +88,7 @@ export default class FaceTracker{
         if(!partsPoints) return;
         partsPoints.map((p)=>{
             if(!p) return
-            cc.fillRect(p[0],p[1],2,2);
+            cc.fillRect(p[0],p[1],6,6);
         })
     }
 
@@ -190,7 +190,12 @@ export default class FaceTracker{
         
     }
 
-}
+    onTrackConverged() {
+        var evt = document.createEvent("Event");
+        evt.initEvent("converged", true, true);
+        document.dispatchEvent(evt)
+    }
+}   
 
 
 class FaceParts{
