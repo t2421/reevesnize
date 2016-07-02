@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Threejs</title>
+    <style>
+        *{
+            padding:0;
+            margin:0;
+        }
+        html{
+            background: #000;
+        }
+        video{
+            position: absolute;
+            left: 0;
+            top: 0;
+            display: none;
+        }
+        #inputImage{
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #drawCanvas{
+            position: relative;
+            z-index:2;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="drawCanvas" width="400" height="300"></canvas>
+    <video id="inputVideo" width="400" height="300" autoplay loop>
+  <source src="../web_modules/clmtrackr/examples/media/cap13_edit2.ogv" type="video/ogg"/>
+</video>
+
+<img id="inputImage" src="../web_modules/clmtrackr/examples/media/cage.jpg" alt="">
+<div id="canvas"></div>
+<script src="index.js"></script>
+</body>
+</html>
