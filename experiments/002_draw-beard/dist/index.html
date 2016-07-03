@@ -25,16 +25,24 @@
         #drawCanvas{
             position: relative;
             z-index:2;
+            display: none;
+        }
+        #beardCanvas{
+            position: absolute;
+            z-index:3;
+            top: 0;
+            left: 0;   
         }
     </style>
 </head>
 <body>
     <canvas id="drawCanvas" width="400" height="300"></canvas>
+    <canvas id="beardCanvas" width="400" height="300"></canvas>
     <video id="inputVideo" width="400" height="300" autoplay loop>
   <source src="../web_modules/clmtrackr/examples/media/cap13_edit2.ogv" type="video/ogg"/>
 </video>
 
-<img id="inputImage" src="../web_modules/clmtrackr/examples/media/cage.jpg" alt="">
+<img id="inputImage" src="../web_modules/clmtrackr/examples/media/audre_small.jpg" alt="">
 <div id="canvas"></div>
 <script src="index.js"></script>
 </body>

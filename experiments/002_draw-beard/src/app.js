@@ -2,6 +2,7 @@
 import clm from 'exports?clm!clmtrackr/clmtrackr';
 import defaultModel from 'exports?pModel!clmtrackr/models/model_pca_20_svm';
 import FaceTracker from './Facetracker'
+import CanvasBuffer from "./CanvasBuffer"
 class App {
     constructor() {
         this.tracker = new FaceTracker();
@@ -19,7 +20,10 @@ class App {
         this.canvasInput.width = this.target.width;
         this.canvasInput.height = this.target.height;
         
-                    
+        
+        this.beardCanvas = document.getElementById('beardCanvas');
+        this.beardCanvas.width = this.target.width;
+        this.beardCanvas.height = this.target.height;
         // this.update();
 
         window.addEventListener('mousedown',this.onMouseDown.bind(this));
@@ -60,6 +64,7 @@ class App {
     }
 
     drawBeard(beardParts){
+
         this.cc.fillStyle = "rgba(0,0,0,0.2)";
         this.cc.beginPath();
         this.cc.moveTo(beardParts[0][0]/this.scale,beardParts[0][1]/this.scale);
@@ -67,21 +72,13 @@ class App {
             this.cc.lineTo(beardParts[i][0]/this.scale,beardParts[i][1]/this.scale);
         };
 
-        
-
         this.cc.closePath();
         this.cc.fill();
 
-        var imgData = this.cc.getImageData(0,0,this.target.width,this.target.height);
-
-        console.log(getPixelXY(imgData,0,0));
-        function getPixel(imgData, index) {
-          var i = index*4, d = imgData.data;
-          return [d[i],d[i+1],d[i+2],d[i+3]] // returns array [R,G,B,A]
-        }
-        function getPixelXY(imgData, x, y) {
-          return getPixel(imgData, y*imgData.width+x);
-        }
+        this.canvasBuffer = new CanvasBuffer(this.canvasInput);
+        this.canvasBuffer.init();
+        this.canvasBuffer.shuffle();
+        this.updateBeard();
 
     }
 
@@ -94,6 +91,14 @@ class App {
         this.cc.clearRect(0, 0, this.canvasInput.width, this.canvasInput.height);
         this.tracker.update();
         this.tracker.drawPoints(this.canvasInput);
+    }
+
+    updateBeard(){
+        var ctx = this.beardCanvas.getContext('2d');
+        requestAnimationFrame(this.updateBeard.bind(this));
+        var pixel = this.canvasBuffer.getNextPixel();
+        ctx.fillStyle = "rgba("+0+","+0+","+0+","+0.1+")"
+        ctx.fillRect(pixel.x,pixel.y,1,3);
     }
 
     onMouseUp(e) {
